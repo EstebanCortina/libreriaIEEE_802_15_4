@@ -11,14 +11,16 @@ public:
   String GET_PAYLOAD(void);
   bool CHECKSUM(uint8_t arreglo[]);
   int tam(uint8_t arreglo[]);
-  uint8_t MAC16[2];
+
 
 private:
   uint8_t trama[58];
   uint8_t length[2];
   uint8_t type;
+  String MAC16;
   int size;
-  String MAC48 = "00:13:A2:00:";
+  String MAC48="00:13:A2:00:";
+  uint8_t MAC[2];
   uint8_t rssi;
   uint8_t option;
   String mensaje;
@@ -39,11 +41,11 @@ int IEEE_802_15_4::tam(uint8_t arreglo[])
 
 String IEEE_802_15_4::GET_MAC48()
 {
-  return MAC48 += (String(MAC16[0]) + ":" + String(MAC16[1]));
+  return MAC48 += (String(MAC[0],HEX) + ":" + String(MAC[1],HEX));
 }
 String IEEE_802_15_4::GET_MAC16()
 {
-  return (String(MAC16[0]) + ":" + String(MAC16[1]));
+  return MAC16+=(String(MAC[0],HEX)+":"+String(MAC[1],HEX));
 }
 
 uint8_t IEEE_802_15_4::GET_LENGTH()
@@ -95,9 +97,9 @@ IEEE_802_15_4::IEEE_802_15_4(uint8_t arreglo[])
   i++;
   type = arreglo[i];
   i++;
-  MAC16[0] = arreglo[i];
+  MAC[0] = arreglo[i];
   i++;
-  MAC16[1] = arreglo[i];
+  MAC[1] = arreglo[i];
   i++;
   rssi = arreglo[i];
   i++;

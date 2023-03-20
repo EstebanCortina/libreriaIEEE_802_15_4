@@ -30,7 +30,7 @@ void setup()
   Serial.println(radio.GET_MAC48());
   Serial.println(radio.GET_TYPE(), HEX);
   Serial.println(radio.GET_OPTION(), HEX);
-  Serial.println(String(radio.MAC16[0], HEX) +":"+String(radio.MAC16[1], HEX));
+  Serial.println(radio.GET_MAC16());
   Serial.println(radio.CHECKSUM(array));
   Serial.println(radio.GET_PAYLOAD());
   Serial.println(radio.GET_RSSI());
